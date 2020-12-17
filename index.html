@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.0.2/tailwind.min.css" integrity="sha512-+WF6UMXHki/uCy0vATJzyA9EmAcohIQuwpNz0qEO+5UeE5ibPejMRdFuARSrl1trs3skqie0rY/gNiolfaef5w==" crossorigin="anonymous" />
+    <title>Musix Lyrics</title>
+</head>
+<body>
+    <!-- Navbar -->
+    <div class="bg-blue-500">
+        <div class="container mx-auto py-1.5 text-center text-3xl font-bold">
+            <h1>Musix Lyrics</h1>
+        </div>
+    </div>
+    <!-- Form -->
+    <div class="container mx-auto px-10">
+        <form class="mt-6">
+            <div class="flex justify-between gap-3 flex-col md:flex-row">
+              <span class="w-full md:w-1/2">
+                <label for="artist" class="block text-xs font-semibold text-gray-600 uppercase">Artist</label>
+                <input id="artist" type="text" name="artist" placeholder="Artist" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+              </span>
+              <span class="w-full md:w-1/2">
+                <label for="song" class="block text-xs font-semibold text-gray-600 uppercase">Song</label>
+                <input id="song" type="text" name="song" placeholder="Song" class="block w-full p-3 mt-2 text-gray-700 bg-gray-200 appearance-none focus:outline-none focus:bg-gray-300 focus:shadow-inner" required />
+              </span>
+            </div>
+            <button id="search" type="submit" class="w-full py-3 mt-6 font-medium tracking-widest text-white uppercase bg-black shadow-lg focus:outline-none hover:bg-gray-900 hover:shadow-none">
+              Search
+            </button>
+        </form>
+        <div class="text-center py-5">
+          <pre id="lyrics">
+Slow down you crazy child
+You're so ambitious for a juvenile
+But then if you're so smart tell me,
+Why are you still so afraid? (mmmmm)
+
+Where's the fire, what's the hurry about?
+You better cool it off before you burn it out
+You got so much to do and only
+So many hours in a day (Ay)
+
+But you know that when the truth is told
+That you can get what you want
+Or you can just get old
+You're gonna kick off before you even get halfway through (Oooh)
+...
+
+******* This Lyrics is NOT for Commercial use *******
+(1409620902416)
+          </pre>
+        </div>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
