@@ -1,5 +1,5 @@
 // api keys
-const musixApi = '8c9aba7820f0a2a2c679ca19e9441cbe';
+const musixApi = config.musixKey;
 
 // input selectors
 const artistInput = document.querySelector('#artist').value;
@@ -9,9 +9,10 @@ const lyricsDisplay = document.querySelector('#lyrics');
 
 // event listeners
 searchBtn.addEventListener('click', (e) => {
-  e.preventDefault();
+  console.log('search submitted');
   searchSong(songInput, artistInput, musixApi)
     .then((res) => {
+      console.log('searching');
       if (res.message.header.status_code === 200) {
         searchLyrics(res.message.body.track.track_id)
           .then((res) => {
@@ -21,6 +22,7 @@ searchBtn.addEventListener('click', (e) => {
       }
     })
     .catch((err) => console.log(err));
+  e.preventDefault();
 });
 
 async function searchSong(songInput, artistInput, musixApi) {
@@ -44,3 +46,6 @@ async function searchLyrics(trackId, apikey = musixApi) {
   const responseData = await response.json();
   return responseData;
 }
+
+// TODO - promise.all() for multiple async functions
+// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
