@@ -2,23 +2,29 @@
 const musixApi = config.musixKey;
 
 // input selectors
-const artistInput = document.querySelector('#artist').value;
-const songInput = document.querySelector('#song').value;
+const artistInput = document.querySelector('#artist');
+const songInput = document.querySelector('#song');
 const searchBtn = document.querySelector('#search');
 const lyricsDisplay = document.querySelector('#lyrics');
+const titleDisplay = document.querySelector('#titleDisplay');
+
+// cors proxy cloned from https://github.com/Rob--W/cors-anywhere/
+let proxyurl = 'https://serene-sierra-41298.herokuapp.com/';
 
 // event listeners
 searchBtn.addEventListener('click', (e) => {
-  console.log('search submitted');
-  searchSong(songInput, artistInput, musixApi)
+  searchSong(songInput.value, artistInput.value, musixApi)
     .then((res) => {
-      console.log('searching');
+      console.log(res);
+      titleDisplay.textContent = `${res.message.body.track.track_name} by ${res.message.body.track.artist_name}`;
+
       if (res.message.header.status_code === 200) {
         searchLyrics(res.message.body.track.track_id)
           .then((res) => {
             lyricsDisplay.textContent = res.message.body.lyrics.lyrics_body;
           })
           .catch((err) => console.log(err));
+        clearInput();
       }
     })
     .catch((err) => console.log(err));
@@ -26,7 +32,6 @@ searchBtn.addEventListener('click', (e) => {
 });
 
 async function searchSong(songInput, artistInput, musixApi) {
-  let proxyurl = 'https://cors-anywhere.herokuapp.com/';
   let url = 'https://api.musixmatch.com/ws/1.1/matcher.track.get?';
   let artist = artistInput;
   let song = songInput;
@@ -38,7 +43,7 @@ async function searchSong(songInput, artistInput, musixApi) {
 }
 
 async function searchLyrics(trackId, apikey = musixApi) {
-  let proxyurl = 'https://cors-anywhere.herokuapp.com/';
+  // console.log(`Track ID = ${trackId}`);
   let url = 'https://api.musixmatch.com/ws/1.1/track.lyrics.get?';
   const response = await fetch(
     `${proxyurl}${url}apikey=${musixApi}&track_id=${trackId}`
@@ -47,5 +52,7 @@ async function searchLyrics(trackId, apikey = musixApi) {
   return responseData;
 }
 
-// TODO - promise.all() for multiple async functions
-// https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise/all
+function clearInput() {
+  artistInput.value = '';
+  songInput.value = '';
+}
